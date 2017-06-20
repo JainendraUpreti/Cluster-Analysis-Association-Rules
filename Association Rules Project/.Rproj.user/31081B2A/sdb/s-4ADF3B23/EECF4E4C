@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#1) install packages####\n\ninstall.packages(\"arules\")\ninstall.packages(\"arulesViz\")\n\nlibrary(arules)\nlibrary(arulesViz)\n\n#2) read data \n\n\n\n\nTransFood <- read.csv('http://homepages.uc.edu/~maifg/DataMining/data/food_4_association.csv')\nTransFood <- TransFood[, -1]\nTransFood <- as(as.matrix(TransFood), \"transactions\")\nTransFood\nsummary(TransFood)\n\nitemFrequencyPlot(TransFood, support = 0.1, cex.names=0.8)\n?itemFrequencyPlot\nbasket_rules <- apriori(TransFood,parameter = list(sup = 0.003, conf = 0.5,target=\"rules\"))\n\nsummary(basket_rules)\ninspect(head(basket_rules))\ninspect(subset(basket_rules,lift>8.9))\nplot(basket_rules, interactive=T)\n\nplot(head(sort(basket_rules, by=\"lift\"), 10), method = \"graph\")\n\nplot(basket_rules, method=\"grouped\")\n",
+    "created" : 1497989019048.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3397617866",
+    "id" : "EECF4E4C",
+    "lastKnownWriteTime" : 1495294300,
+    "last_content_update" : 1495294300,
+    "path" : "J:/Data mining/case study 2/Association Rules.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

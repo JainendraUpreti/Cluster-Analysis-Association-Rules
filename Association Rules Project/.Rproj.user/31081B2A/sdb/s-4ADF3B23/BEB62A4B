@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(lubridate) # Handling dates\nlibrary(stringr) # Handling strings\nlibrary(readr) # Reading csv files\nlibrary(tidyr) # Data manipulation\nlibrary(dplyr) # Data manipulation\nlibrary(ggplot2) # Plots\nlibrary(forcats) # Factors\nlibrary(datasets)\n\ninstall.packages(\"ggfortify\")\ngetwd()\nsetwd(\"J:/Data mining/case study 2\")\n\ngetwd()\ndata(\"iris\")\ncluster_data\nView(cluster_data)\n",
+    "created" : 1497990107999.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4100243089",
+    "id" : "BEB62A4B",
+    "lastKnownWriteTime" : 1492906707,
+    "last_content_update" : 1492906707,
+    "path" : "J:/Data mining/case study 2/case study 2.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
