@@ -118,3 +118,31 @@ plot(mclust_result)
 ## Working on the second dataset TransFood 
 View(TransFood)
 
+# first column not required
+
+TransFood <- TransFood[, -1]
+TransFood <- as(as.matrix(TransFood), "transactions")
+TransFood
+summary(TransFood)
+
+
+# plotting relative item frequency to find support to be taken to setup association rules
+itemFrequencyPlot(TransFood, support = 0.1, cex.names=0.8, col= "blue")
+
+## Association rule using Apriori Algorithm: Support = 3% and confindence = 50%
+basket_rules <- apriori(TransFood,parameter = list(sup = 0.003, conf = 0.5,target="rules"))
+
+summary(basket_rules) #the mean value for lift is around 8.9
+inspect(head(basket_rules))
+
+#only list rules for which lift value is greater than 8.9
+inspect(subset(basket_rules,lift>8.9))
+
+# Plot for 42 rules
+plot(basket_rules, interactive=T)
+
+#Graph for 10 rules
+plot(head(sort(basket_rules, by="lift"), 10), method = "graph")
+
+#Grouped matrix for 42 rules
+plot(basket_rules, method="grouped")
