@@ -56,6 +56,8 @@ box()
 #Preparing the data for cluster analysis
 zooc_norm <- scale(zooc[,-1]) #normalizing the data 
 summary(zooc_norm)
+zooc_norm <- as.data.frame(zooc_norm)
+str(zooc_norm)
 
 ## K-means clustering
 
@@ -68,3 +70,26 @@ plot(1:12, wss, type="b", xlab="Number of Clusters",ylab="Within groups sum of s
 
 ### Prediction strength
 prediction.strength(zooc_norm, Gmin=2, Gmax=15, M=50,cutoff=0.8)
+
+### Silhouetee coefficient and dunn index ####
+d <- dist(zooc_norm, method = "euclidean")
+result <- matrix(nrow = 14, ncol = 3)
+for (i in 2:15){
+  cluster_result = kmeans(zooc_norm, i)
+  clusterstat=cluster.stats(d, cluster_result$cluster)
+  result[i-1,1]=i
+  result[i-1,2]=clusterstat$avg.silwidth
+  result[i-1,3]=clusterstat$dunn   
+}
+plot(result[,c(1,2)], type="l", ylab = 'silhouette width', xlab = 'number of clusters')
+plot(result[,c(1,3)], type="l", ylab = 'dunn index', xlab = 'number of clusters')
+
+#the best cluster size choice seems to be 3. Calculating other parameters for this size
+
+zooc_norm3=kmeans(zooc_norm,3)
+plotcluster(zooc_norm, zooc_norm3$cluster)
+table(zooc_norm3$cluster)
+zooc_norm3$tot.withinss
+zooc_norm3$betweenss
+zooc_norm3$totss
+
