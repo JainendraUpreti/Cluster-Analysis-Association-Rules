@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1498074269768.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "45A13D3E",
+    "lastKnownWriteTime" : 32651513914720368,
+    "last_content_update" : 1498074269768,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "C7CAA24B",
+        "caption" : "TransFood",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=TransFood&cache_key=C7CAA24B",
+        "displayedObservations" : 19076,
+        "environment" : "",
+        "object" : "TransFood",
+        "preview" : 0,
+        "totalObservations" : 19076,
+        "variables" : 119
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

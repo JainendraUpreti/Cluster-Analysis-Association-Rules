@@ -53,6 +53,8 @@ axis(side = 2, at = seq(0, 20000, 2500), labels = TRUE, las = 0.5)
 box()
 ## the sales observed in the month of october far exceeds the sales observed in other months
 
+####################### Cluster Analysis ###########################
+
 #Preparing the data for cluster analysis
 zooc_norm <- scale(zooc[,-1]) #normalizing the data 
 summary(zooc_norm)
@@ -92,4 +94,27 @@ table(zooc_norm3$cluster)
 zooc_norm3$tot.withinss
 zooc_norm3$betweenss
 zooc_norm3$totss
+
+#Hierarchical Clustering using Ward method
+
+dis = dist(zooc_norm)
+hier_ward=hclust(dis, method="ward.D2")
+plot(hier_ward)
+hier_ward.cut=cutree(hier_ward,3)
+rect.hclust(hier_ward, k=3, border = "blue")
+plotcluster(zooc_norm,hier_ward.cut)
+table(hier_ward.cut)
+
+#Model Clustering
+
+mclust_result=Mclust(zooc_norm)
+summary(mclust_result)
+
+plot(mclust_result)
+
+
+#################### Associatoin Rules #################
+
+## Working on the second dataset TransFood 
+View(TransFood)
 
