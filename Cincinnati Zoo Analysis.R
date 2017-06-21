@@ -35,7 +35,36 @@ check_nan <- function(x)
   do.call(cbind, lapply(x, is.nan))
 check_nan(zooc) #no missing values in the dataset
 
-boxplot(zooc[,-1], ylab = 'Sales', xlab = 'months', col = rainbow(unique(6)))
+#boxplot
+boxplot(zooc[,-1], ylab = 'Sales', xlab = 'months', col = rainbow(unique(6)),
+        at = c(1:6)-c(1, 1.5, 2, 2.5, 3, 3.5), boxwex = 0.3, xaxt = "n")
 # for october, december and march, we can observe a few outliers in the sales
+legend("topright", legend = c("Oct'10", "Nov'10","Dec'10", "Jan'11", "Feb'11", "Mar'11"),
+       fill = rainbow(unique(6)), cex = 0.70)
+?legend
 
-hist(zooc[,-1])
+#barplot to observe the sales over months
+Tot_vect <- colSums(zooc[,-1])
+Tot_vect
+
+barplot(Tot_vect, las = 0.5,yaxt = "n",ylim = c(0, 20000), ylab = "Sales", xlab = "months", 
+        col = rainbow(unique(6)), width = 0.8, space = 0.3)
+axis(side = 2, at = seq(0, 20000, 2500), labels = TRUE, las = 0.5)
+box()
+## the sales observed in the month of october far exceeds the sales observed in other months
+
+#Preparing the data for cluster analysis
+zooc_norm <- scale(zooc[,-1]) #normalizing the data 
+summary(zooc_norm)
+
+## K-means clustering
+
+wss <- (nrow(zooc_norm)-1)*sum(apply(zooc_norm,2,var))
+for (i in 2:12) wss[i] <- sum(kmeans(zooc_norm,
+                                     centers=i)$withinss)
+plot(1:12, wss, type="b", xlab="Number of Clusters",ylab="Within groups sum of squares")
+
+### Finding the best cluster size
+
+### Prediction strength
+prediction.strength(zooc_norm, Gmin=2, Gmax=15, M=50,cutoff=0.8)
